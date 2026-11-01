@@ -14,7 +14,13 @@ jobs:
       - name: Install Butler
         uses: remarkablegames/setup-butler@v3
 
+      - name: Extract game files
+        run: |
+          mkdir game
+          unzip laundry-day-deployed-snapshot.zip -d game
+          find game -name index.html
+
       - name: Upload game
-        run: butler push . ShaneekahDigitalHub/laundry-day-and-clean-salon-challenge:html5
+        run: butler push game ShaneekahDigitalHub/laundry-day-and-clean-salon-challenge:download
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
